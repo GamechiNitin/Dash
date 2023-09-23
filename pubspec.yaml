@@ -41,6 +41,9 @@ dependencies:
   # Animation
   shimmer: ^3.0.0
 
+  firebase_core: ^2.16.0
+  firebase_auth: ^4.10.0
+  
   # StateManagement
   flutter_bloc: ^8.1.3
 
