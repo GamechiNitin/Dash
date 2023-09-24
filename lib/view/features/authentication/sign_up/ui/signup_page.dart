@@ -57,8 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       // backgroundColor: kWhiteColor,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        centerTitle: false,
+        automaticallyImplyLeading: false,
+        leadingWidth: 10,
+        centerTitle: true,
         title: Text(
           'Create Account',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -90,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 80),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,39 +101,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            TextFormWidget(
-                              controller: userNameController,
-                              focusNode: userNameFn,
-                              label: 'Enter Username',
-                              hint: "Ex. Test123",
-                              prefixIcon: Icons.person,
-                              errorText: userNameErrorText,
-                              validator: (val) {
-                                if (val == null || val.isEmpty) {
-                                  return userNameErrorText =
-                                      'Enter your username';
-                                } else {
-                                  return userNameErrorText = null;
-                                }
-                              },
-                              onEditingComplete: () {
-                                if (userNameController.text.isEmpty) {
-                                  userNameErrorText = 'Enter your username';
-                                } else {
-                                  userNameErrorText = null;
-                                }
-                                _notify();
-                              },
-                              onChanged: (val) {
-                                if (val.isEmpty) {
-                                  userNameErrorText = 'Enter your username';
-                                } else {
-                                  userNameErrorText = null;
-                                }
-                                _notify();
-                              },
-                            ),
-                            const SizedBox(height: testFeildPadding),
                             TextFormWidget(
                               controller: emailIdController,
                               focusNode: emailFn,

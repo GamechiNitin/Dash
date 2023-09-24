@@ -112,7 +112,8 @@ class _LogInPageState extends State<LogInPage> {
           return Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.only(bottom: 50, left: 20, right: 20),
+                padding: const EdgeInsets.only(
+                    bottom: 0, left: 20, right: 20, top: 60),
                 children: [
                   const WelcomeWidget(),
                   Form(

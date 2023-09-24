@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dash/utils/imports.dart';
 
 part 'sign_up_event.dart';
@@ -14,18 +12,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       CreateAccountEvent event, Emitter<SignUpState> emit) async {
     emit(LoadingState(true));
     final response = await AuthRepository.createAccount(event.userModel);
-    if (response.$1 == "200" && response.$2 != null) {
-      log(response.$2!.id.toString());
-      emit(AccountCreatedState());
-      bool currentUser = await LocalDatabase.saveCurrentUser(response.$2!);
-      if (currentUser) {
-        emit(HomeNavigateState());
-      } else {
-        emit(ErrorState("Not able to save user. Try again Later!"));
-      }
+    if (response.$1 == "200") {
+      emit(HomeNavigateState());
     } else {
       emit(ErrorState(response.$1));
-      emit(LoadingState(false));
     }
+    emit(LoadingState(false));
   }
 }
