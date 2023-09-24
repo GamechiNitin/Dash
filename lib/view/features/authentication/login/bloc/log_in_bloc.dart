@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dash/utils/imports.dart';
 
 part 'log_in_event.dart';
@@ -15,18 +13,9 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     emit(LoadingState(true));
 
     final response = await AuthRepository.logIn(event.userModel);
-    if (response.$1 == "200" && response.$2 != null) {
-      log(response.$2!.id.toString());
-      emit(AccountCreatedState());
-      bool currentUser = await LocalDatabase.saveCurrentUser(response.$2!);
-      if (currentUser) {
-        emit(HomeNavigateState());
-      } else {
-        emit(ErrorState("Not able to save user. Try again Later!"));
-      }
-    } else {
+    if (response.$1 != "200") {
       emit(ErrorState(response.$1));
-      emit(LoadingState(false));
     }
+    emit(LoadingState(false));
   }
 }

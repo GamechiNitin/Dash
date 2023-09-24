@@ -120,38 +120,6 @@ class _LogInPageState extends State<LogInPage> {
                     child: Column(
                       children: [
                         TextFormWidget(
-                          controller: userNameController,
-                          focusNode: userNameFn,
-                          label: 'Enter Username',
-                          hint: "Ex. Test123",
-                          prefixIcon: Icons.person,
-                          errorText: userNameErrorText,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return userNameErrorText = 'Enter your username';
-                            } else {
-                              return userNameErrorText = null;
-                            }
-                          },
-                          onEditingComplete: () {
-                            if (userNameController.text.isEmpty) {
-                              userNameErrorText = 'Enter your username';
-                            } else {
-                              userNameErrorText = null;
-                            }
-                            _notify();
-                          },
-                          onChanged: (val) {
-                            if (val.isEmpty) {
-                              userNameErrorText = 'Enter your username';
-                            } else {
-                              userNameErrorText = null;
-                            }
-                            _notify();
-                          },
-                        ),
-                        const SizedBox(height: testFeildPadding),
-                        TextFormWidget(
                           textInputAction: TextInputAction.next,
                           controller: emailIdController,
                           focusNode: emailIdFn,
@@ -288,7 +256,6 @@ class _LogInPageState extends State<LogInPage> {
                               UserModel userModel = UserModel(
                                 email: emailIdController.text.trim(),
                                 password: passwordController.text.trim(),
-                                username: userNameController.text.trim(),
                               );
                               logInBloc.add(LogInToAccountEvent(userModel));
                             }

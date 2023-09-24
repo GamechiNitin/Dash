@@ -1,6 +1,8 @@
 import 'package:dash/utils/imports.dart';
 import 'package:dash/view/navbar_page.dart';
 
+import 'features/authentication/auth_page.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -20,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
     if (userModel?.id != null || userModel?.token != null) {
       goToHome();
     } else {
-      goToLogIn();
+      goToAuthPage();
     }
   }
 
@@ -38,6 +40,13 @@ class _SplashPageState extends State<SplashPage> {
   goToLogIn() {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (c) => const LogInPage()),
+      (route) => false,
+    );
+  }
+
+  goToAuthPage() {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (c) => const AuthPage()),
       (route) => false,
     );
   }

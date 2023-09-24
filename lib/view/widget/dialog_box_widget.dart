@@ -1,4 +1,5 @@
 import 'package:dash/utils/imports.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DialogBoxWidget {
   static Future<void> logOutDialog(BuildContext context) async {
@@ -42,12 +43,13 @@ class DialogBoxWidget {
               margin: EdgeInsets.zero,
               onTap: () {
                 Navigator.pop(context);
-                LocalDatabase.clear();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => const LogInPage(),
-                    ),
-                    (route) => false);
+                FirebaseAuth.instance.signOut();
+                // LocalDatabase.clear();
+                // Navigator.of(context).pushAndRemoveUntil(
+                //     MaterialPageRoute(
+                //       builder: (context) => const LogInPage(),
+                //     ),
+                //     (route) => false);
               },
             ),
           ],
